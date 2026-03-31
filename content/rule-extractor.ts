@@ -1,10 +1,6 @@
-import { Segment } from 'segmentit';
-
-const segmentit = Segment.useDefault();
-
 export function extractHighlightsByRules(content: string[]): number[] {
   const highlights = new Set<number>();
-  const keywords = findKeywords(content);
+  const keywords = ['总结', '结论', '总之', '综上', '最终'];
 
   content.forEach((paragraph, index) => {
     // Rule 1: First and last paragraphs
@@ -14,8 +10,7 @@ export function extractHighlightsByRules(content: string[]): number[] {
     }
 
     // Rule 2: Contains summary/conclusion keywords
-    const summaryKeywords = ['总结', '结论', '总之', '综上', '最终'];
-    if (summaryKeywords.some(kw => paragraph.includes(kw))) {
+    if (keywords.some(kw => paragraph.includes(kw))) {
       highlights.add(index);
       return;
     }
@@ -26,34 +21,23 @@ export function extractHighlightsByRules(content: string[]): number[] {
       return;
     }
 
-    // Rule 4: Contains repeated keywords
-    const segments = segmentit.doSegment(paragraph, { simple: true });
-    const paragraphWords = segments.map(s => s.w);
-    const matches = paragraphWords.filter(w => keywords.includes(w));
-    if (matches.length >= 2) {
+    // Rule 4: Contains repeated keywords (simple frequency check)
+    const words = paragraph.split('').filter(w => w.length >= 2);
+    const wordCount = new Map<string, number>();
+    words.forEach(w => {
+      const count = wordCount.get(w) || 0;
+      wordCount.set(w, count + 1);
+    });
+
+    // Find words that appear 3+ times
+    const repeatedWords = Array.from(wordCount.entries())
+      .filter(([_, count]) => count >= 3)
+      .map(([word, _]) => word);
+
+    if (repeatedWords.some(w => paragraph.includes(w))) {
       highlights.add(index);
     }
   });
 
   return Array.from(highlights).sort((a, b) => a - b);
-}
-
-function findKeywords(content: string[]): string[] {
-  const wordCount = new Map<string, number>();
-
-  content.forEach(paragraph => {
-    const segments = segmentit.doSegment(paragraph, { simple: true });
-    segments.forEach(segment => {
-      if (segment.w.length > 1) {
-        const count = wordCount.get(segment.w) || 0;
-        wordCount.set(segment.w, count + 1);
-      }
-    });
-  });
-
-  return Array.from(wordCount.entries())
-    .filter(([_, count]) => count >= 2)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 10)
-    .map(([word, _]) => word);
 }

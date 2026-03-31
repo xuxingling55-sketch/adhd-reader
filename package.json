@@ -9,8 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mozilla/readability": "^0.5.0",
-    "segmentit": "^3.2.4"
+    "@mozilla/readability": "^0.5.0"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.0.0-beta.23",
