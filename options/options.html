@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>简阅 ADHD - 设置</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <header>
+    <h1>⚙️ 简阅 ADHD - 设置</h1>
+    <p>自定义你的阅读体验</p>
+  </header>
+
+  <main>
+    <section class="setting-section">
+      <h2>外观设置</h2>
+
+      <div class="setting-item">
+        <label for="theme-select">主题</label>
+        <select id="theme-select">
+          <option value="light">🌞 亮色模式</option>
+          <option value="dark">🌙 夜间模式</option>
+        </select>
+      </div>
+
+      <div class="setting-item">
+        <label for="font-size-range">字号</label>
+        <div class="range-wrapper">
+          <input type="range" id="font-size-range" min="14" max="24" value="16">
+          <span id="font-size-value">16px</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="setting-section">
+      <h2>提取设置</h2>
+
+      <div class="setting-item">
+        <label for="extract-mode-select">提取模式</label>
+        <select id="extract-mode-select">
+          <option value="rule">📋 规则提取（免费）</option>
+          <option value="ai">🤖 AI 提取（需配置）</option>
+        </select>
+      </div>
+
+      <div class="setting-item" id="api-key-group" style="display: none;">
+        <label for="api-key-input">DeepSeek API Key</label>
+        <input type="password" id="api-key-input" placeholder="输入你的 API Key">
+        <p class="hint">
+          <a href="https://platform.deepseek.com" target="_blank">获取 API Key</a> •
+          用于更准确的重点提取
+        </p>
+      </div>
+    </section>
+
+    <section class="setting-section">
+      <h2>阅读设置</h2>
+
+      <div class="setting-item">
+        <label class="checkbox-label">
+          <input type="checkbox" id="show-highlight-check" checked>
+          <span>显示高亮</span>
+        </label>
+        <p class="hint">在原文中高亮显示重点段落</p>
+      </div>
+
+      <div class="setting-item">
+        <label class="checkbox-label">
+          <input type="checkbox" id="highlight-only-check">
+          <span>只显示高亮内容</span>
+        </label>
+        <p class="hint">隐藏非重点段落，极速阅读模式</p>
+      </div>
+    </section>
+
+    <section class="setting-section">
+      <h2>历史记录</h2>
+
+      <div class="setting-item">
+        <button id="clear-history-btn" class="secondary-btn">清除历史记录</button>
+        <p class="hint">删除所有阅读历史</p>
+      </div>
+    </section>
+
+    <footer>
+      <button id="save-btn" class="primary-btn">保存设置</button>
+      <span id="save-status"></span>
+    </footer>
+  </main>
+
+  <script type="module" src="options.ts"></script>
+</body>
+</html>

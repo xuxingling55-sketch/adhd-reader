@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>简阅 ADHD</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <h1>📖 简阅 ADHD</h1>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="reading">阅读模式</button>
+    <button class="tab" data-tab="settings">设置</button>
+  </nav>
+
+  <div id="reading-tab" class="tab-content active">
+    <section class="recent-reads">
+      <h2>最近阅读</h2>
+      <ul id="history-list"></ul>
+    </section>
+
+    <section class="manual-input">
+      <input type="text" id="url-input" placeholder="输入网址或选择...">
+      <button id="start-btn">开始阅读</button>
+    </section>
+  </div>
+
+  <div id="settings-tab" class="tab-content">
+    <section class="setting-group">
+      <label>
+        <span>主题</span>
+        <select id="theme-select">
+          <option value="light">亮色模式</option>
+          <option value="dark">夜间模式</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="setting-group">
+      <label>
+        <span>字号</span>
+        <input type="range" id="font-size-range" min="14" max="24" value="16">
+        <span id="font-size-value">16px</span>
+      </label>
+    </section>
+
+    <section class="setting-group">
+      <label>
+        <span>提取模式</span>
+        <select id="extract-mode-select">
+          <option value="rule">规则提取（免费）</option>
+          <option value="ai">AI 提取</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="setting-group" id="api-key-group" style="display: none;">
+      <label>
+        <span>DeepSeek API Key</span>
+        <input type="password" id="api-key-input" placeholder="输入你的 API Key">
+      </label>
+      <small>DeepSeek 注册地址：https://platform.deepseek.com</small>
+    </section>
+
+    <section class="setting-group">
+      <label>
+        <input type="checkbox" id="show-highlight-check" checked>
+        <span>显示高亮</span>
+      </label>
+    </section>
+
+    <section class="setting-group">
+      <label>
+        <input type="checkbox" id="highlight-only-check">
+        <span>只显示高亮内容</span>
+      </label>
+    </section>
+
+    <button id="save-btn">保存设置</button>
+  </div>
+
+  <script type="module" src="popup.ts"></script>
+</body>
+</html>

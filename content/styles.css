@@ -1,0 +1,26 @@
+#adhd-reader-overlay * {
+  box-sizing: border-box;
+}
+
+#adhd-reader-overlay p {
+  transition: all 0.2s ease;
+}
+
+#adhd-reader-overlay button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+#adhd-reader-overlay button:active {
+  transform: translateY(0);
+}
+
+/* Focus mode - hide distractions when reading */
+body.adhd-focus-mode aside,
+body.adhd-focus-mode nav,
+body.adhd-focus-mode footer,
+body.adhd-focus-mode .sidebar,
+body.adhd-focus-mode .comments,
+body.adhd-focus-mode .ad {
+  display: none !important;
+}
